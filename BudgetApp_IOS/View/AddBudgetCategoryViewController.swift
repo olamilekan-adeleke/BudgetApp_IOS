@@ -12,10 +12,18 @@ import UIKit
 class AddBudgetCategoryViewController: UIViewController {
     private var persistantContainer: NSPersistentContainer
     
+    private func iconHelper(_ systemName: String) -> UIView {
+        let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        var image = UIImage(systemName: systemName)?.with(insets)
+        image = image!.withTintColor(UIColor.gray)
+        let imageView = UIImageView(image: image)
+        return imageView
+    }
+    
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Budget Name"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftView = iconHelper("text.book.closed")
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
         return textField
@@ -24,7 +32,7 @@ class AddBudgetCategoryViewController: UIViewController {
     lazy var amountTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Budget Amount"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+        textField.leftView = iconHelper("nairasign")
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
         return textField
@@ -34,6 +42,10 @@ class AddBudgetCategoryViewController: UIViewController {
         let button = UIButton(configuration: .bordered())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Save Budget", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
+        button.backgroundColor = .systemTeal
+        
         return button
     }()
     
@@ -52,8 +64,7 @@ class AddBudgetCategoryViewController: UIViewController {
         stack.axis = .vertical
         stack.spacing = UIStackView.spacingUseSystem
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        stack.backgroundColor = .gray
+        stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: -20)
         return stack
     }()
     
@@ -85,13 +96,18 @@ class AddBudgetCategoryViewController: UIViewController {
         stackView.addArrangedSubview(addBudgetButton)
         stackView.addArrangedSubview(erroMessage)
         
+        stackView.setCustomSpacing(10, after: nameTextField)
+        stackView.setCustomSpacing(50, after: amountTextField)
+        
         // constarins
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            nameTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.90),
-            amountTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.90),
+            nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            amountTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            
+            addBudgetButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
         ])
         
         // button
@@ -100,46 +116,3 @@ class AddBudgetCategoryViewController: UIViewController {
     
     @objc private func addButtomPressed(_ sender: UIButton) {}
 }
-
-// MARK: - Preview
-
-// #if canImport(swiftUI) && DEBUG
-// import SwiftUI
-// @available(iOS 13.0, *)
-// struct AddBudgetCategoryViewControllerPreview: PreviewProvider {
-//
-//
-//    static var previews: some View {
-//        UINavigationController(rootViewController: AddBudgetCategoryViewController(persistantContainer: persistenceContainer)).preview
-//    }
-// }
-// #endif
-
-var persistenceContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "BudgetModel")
-    container.loadPersistentStores { _, error in
-        if let error = error { fatalError("Unable to load presistance container: \(error)") }
-    }
-    
-    return container
-}()
-
-#if canImport(swiftUI) && DEBUG
-import SwiftUI
-@available(iOS 13, *)
-struct MyViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        AddBudgetCategoryViewController(persistantContainer: persistenceContainer).asPreview()
-    }
-}
-
-// @available(iOS 13.0, *)
-// struct ViewControllerExamplePreview: PreviewProvider {
-//    static var previews: some View {
-//        ViewControllerPreview {
-//            AddBudgetCategoryViewController(persistantContainer: persistenceContainer)
-//        }
-//    }
-// }
-
-#endif

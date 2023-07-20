@@ -49,7 +49,15 @@ class AddBudgetCategoryViewController: UIViewController {
         return button
     }()
     
-    lazy var erroMessage: UILabel = {
+    lazy var nameErroMessage: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.text = ""
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var amountErroMessage: UILabel = {
         let label = UILabel()
         label.textColor = .red
         label.text = ""
@@ -92,12 +100,16 @@ class AddBudgetCategoryViewController: UIViewController {
         view.addSubview(stackView)
         
         stackView.addArrangedSubview(nameTextField)
+        stackView.addArrangedSubview(nameErroMessage)
         stackView.addArrangedSubview(amountTextField)
+        stackView.addArrangedSubview(amountErroMessage)
         stackView.addArrangedSubview(addBudgetButton)
-        stackView.addArrangedSubview(erroMessage)
         
-        stackView.setCustomSpacing(10, after: nameTextField)
+        stackView.setCustomSpacing(20, after: amountErroMessage)
         stackView.setCustomSpacing(50, after: amountTextField)
+        
+        nameTextField.setOnTextChangeListener { nameDidChange() }
+        amountTextField.setOnTextChangeListener { amountDidChange() }
         
         // constarins
         NSLayoutConstraint.activate([
@@ -114,5 +126,34 @@ class AddBudgetCategoryViewController: UIViewController {
         addBudgetButton.addTarget(self, action: #selector(addButtomPressed), for: .touchUpInside)
     }
     
-    @objc private func addButtomPressed(_ sender: UIButton) {}
+    private func validateNameForm() {}
+    
+    @objc private func addButtomPressed(_ sender: UIButton) {
+//        if isFormValid() {
+//            //
+//        } else {
+//            erroMessage.text = "Unable to save budget. Budget name and amount is required."
+//        }
+    }
+    
+    private func nameDidChange() {
+        if nameTextField.text == nil || nameTextField.text?.isEmpty != false {
+            nameErroMessage.text = "Budget name is required."
+        } else {
+            nameErroMessage.text = ""
+        }
+    }
+    
+    private func amountDidChange() {
+        guard let amount = nameTextField.text else {
+            amountErroMessage.text = "Budget amount is required."
+            return
+        }
+        
+        if !amount.isEmpty && Double(amount) == nil && (Double(amount) ?? 0) <= 0 {
+            amountErroMessage.text = "Budget amount must be a vaild number greater than 0"
+        } else {
+            amountErroMessage.text = ""
+        }
+    }
 }

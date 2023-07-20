@@ -16,6 +16,7 @@
 		3936C3552A65460600804DF1 /* AddBudgetCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3936C3542A65460600804DF1 /* AddBudgetCategoryViewController.swift */; };
 		3936C3582A65545300804DF1 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3936C3572A65545300804DF1 /* UIViewController+Extension.swift */; };
 		39E092442A67C7CC0020682A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092432A67C7CC0020682A /* UIImage+Extension.swift */; };
+		39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092452A67EE300020682A /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3936C3542A65460600804DF1 /* AddBudgetCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetCategoryViewController.swift; sourceTree = "<group>"; };
 		3936C3572A65545300804DF1 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		39E092432A67C7CC0020682A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		39E092452A67EE300020682A /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			children = (
 				3936C3572A65545300804DF1 /* UIViewController+Extension.swift */,
 				39E092432A67C7CC0020682A /* UIImage+Extension.swift */,
+				39E092452A67EE300020682A /* UITextField+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				3936C3522A653BE600804DF1 /* BudgetModel.xcdatamodeld in Sources */,
 				3936C3412A65368C00804DF1 /* BudgetCategoryTableViewController.swift in Sources */,
 				3936C33D2A65368C00804DF1 /* AppDelegate.swift in Sources */,
+				39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */,
 				3936C3552A65460600804DF1 /* AddBudgetCategoryViewController.swift in Sources */,
 				3936C33F2A65368C00804DF1 /* SceneDelegate.swift in Sources */,
 			);

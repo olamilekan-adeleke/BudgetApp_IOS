@@ -34,7 +34,7 @@ class BudgetCategoryTableViewController: UIViewController {
     }
 
     private func setUpUI() {
-        var addBudgetCategoryButton = UIBarButtonItem(
+        let addBudgetCategoryButton = UIBarButtonItem(
             title: "Add Category", style: .done, target: self, action: #selector(showAddBudgetCategory)
         )
         addBudgetCategoryButton.tintColor = .systemTeal

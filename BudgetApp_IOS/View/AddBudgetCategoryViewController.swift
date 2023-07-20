@@ -11,6 +11,7 @@ import UIKit
 
 class AddBudgetCategoryViewController: UIViewController {
     private var persistantContainer: NSPersistentContainer
+    private let budgetManager: BudgetManager
     
     private func iconHelper(_ systemName: String) -> UIView {
         let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
@@ -72,7 +73,6 @@ class AddBudgetCategoryViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .leading
         stack.axis = .vertical
-//        stack.spacing = UIStackView.spacingUseSystem
         stack.isLayoutMarginsRelativeArrangement = true
         stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: -20)
         return stack
@@ -80,6 +80,7 @@ class AddBudgetCategoryViewController: UIViewController {
     
     init(persistantContainer: NSPersistentContainer) {
         self.persistantContainer = persistantContainer
+        self.budgetManager = BudgetManager(persistantContainerManager: persistantContainer.viewContext)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -128,14 +129,17 @@ class AddBudgetCategoryViewController: UIViewController {
         addBudgetButton.addTarget(self, action: #selector(addButtomPressed), for: .touchUpInside)
     }
     
-    private func validateNameForm() {}
+    private func isFormValid() -> Bool {
+        return nameErroMessage.text?.isEmpty ?? false && amountErroMessage.text?.isEmpty ?? false
+    }
     
     @objc private func addButtomPressed(_ sender: UIButton) {
-//        if isFormValid() {
-//            //
-//        } else {
-//            erroMessage.text = "Unable to save budget. Budget name and amount is required."
-//        }
+        guard let name = nameTextField.text, let amount = amountTextField.text else { return }
+        
+        if isFormValid() {
+            budgetManager.saveBudget(name: name, amount: Double(amount) ?? 0)
+            dismiss(animated: true)
+        }
     }
     
     private func nameDidChange() {

@@ -52,6 +52,7 @@ class AddBudgetCategoryViewController: UIViewController {
     lazy var nameErroMessage: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.font = label.font.withSize(12)
         label.text = ""
         label.numberOfLines = 0
         return label
@@ -60,6 +61,7 @@ class AddBudgetCategoryViewController: UIViewController {
     lazy var amountErroMessage: UILabel = {
         let label = UILabel()
         label.textColor = .red
+        label.font = label.font.withSize(12)
         label.text = ""
         label.numberOfLines = 0
         return label
@@ -70,7 +72,7 @@ class AddBudgetCategoryViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.alignment = .leading
         stack.axis = .vertical
-        stack.spacing = UIStackView.spacingUseSystem
+//        stack.spacing = UIStackView.spacingUseSystem
         stack.isLayoutMarginsRelativeArrangement = true
         stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: -20)
         return stack
@@ -105,11 +107,8 @@ class AddBudgetCategoryViewController: UIViewController {
         stackView.addArrangedSubview(amountErroMessage)
         stackView.addArrangedSubview(addBudgetButton)
         
-        stackView.setCustomSpacing(20, after: amountErroMessage)
-        stackView.setCustomSpacing(50, after: amountTextField)
-        
-        nameTextField.setOnTextChangeListener { nameDidChange() }
-        amountTextField.setOnTextChangeListener { amountDidChange() }
+        nameTextField.setOnTextChangeListener { self.nameDidChange() }
+        amountTextField.setOnTextChangeListener { self.amountDidChange() }
         
         // constarins
         NSLayoutConstraint.activate([
@@ -121,6 +120,9 @@ class AddBudgetCategoryViewController: UIViewController {
             
             addBudgetButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
         ])
+        
+        stackView.setCustomSpacing(15, after: nameErroMessage)
+        stackView.setCustomSpacing(50, after: amountErroMessage)
         
         // button
         addBudgetButton.addTarget(self, action: #selector(addButtomPressed), for: .touchUpInside)
@@ -137,7 +139,7 @@ class AddBudgetCategoryViewController: UIViewController {
     }
     
     private func nameDidChange() {
-        if nameTextField.text == nil || nameTextField.text?.isEmpty != false {
+        if nameTextField.text == nil || nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty != false {
             nameErroMessage.text = "Budget name is required."
         } else {
             nameErroMessage.text = ""
@@ -145,12 +147,17 @@ class AddBudgetCategoryViewController: UIViewController {
     }
     
     private func amountDidChange() {
-        guard let amount = nameTextField.text else {
+        guard let amount = amountTextField.text else {
             amountErroMessage.text = "Budget amount is required."
             return
         }
         
-        if !amount.isEmpty && Double(amount) == nil && (Double(amount) ?? 0) <= 0 {
+        if amountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty != false {
+            amountErroMessage.text = "Budget amount is required."
+            return
+        }
+        
+        if amount.isEmpty || Double(amount) == nil || (Double(amount) ?? 0) <= 0 {
             amountErroMessage.text = "Budget amount must be a vaild number greater than 0"
         } else {
             amountErroMessage.text = ""

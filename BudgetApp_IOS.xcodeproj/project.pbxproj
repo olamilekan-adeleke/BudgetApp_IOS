@@ -18,6 +18,7 @@
 		39E092442A67C7CC0020682A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092432A67C7CC0020682A /* UIImage+Extension.swift */; };
 		39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092452A67EE300020682A /* UITextField+Extension.swift */; };
 		39E092492A6925430020682A /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092482A6925430020682A /* BudgetManager.swift */; };
+		39E0924B2A6A40460020682A /* BudgetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		39E092432A67C7CC0020682A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		39E092452A67EE300020682A /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		39E092482A6925430020682A /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
+		39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			children = (
 				3936C3402A65368C00804DF1 /* BudgetCategoryTableViewController.swift */,
 				3936C3542A65460600804DF1 /* AddBudgetCategoryViewController.swift */,
+				39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				3936C3522A653BE600804DF1 /* BudgetModel.xcdatamodeld in Sources */,
 				3936C3412A65368C00804DF1 /* BudgetCategoryTableViewController.swift in Sources */,
 				3936C33D2A65368C00804DF1 /* AppDelegate.swift in Sources */,
+				39E0924B2A6A40460020682A /* BudgetDetailViewController.swift in Sources */,
 				39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */,
 				3936C3552A65460600804DF1 /* AddBudgetCategoryViewController.swift in Sources */,
 				3936C33F2A65368C00804DF1 /* SceneDelegate.swift in Sources */,

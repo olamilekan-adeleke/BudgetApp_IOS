@@ -130,7 +130,9 @@ class AddBudgetCategoryViewController: UIViewController {
     }
     
     private func isFormValid() -> Bool {
-        return nameErroMessage.text?.isEmpty ?? false && amountErroMessage.text?.isEmpty ?? false
+        guard let name = nameErroMessage.text, let amount = amountErroMessage.text else { return false }
+        
+        return name.isEmpty == true && amount.isEmpty == true
     }
     
     @objc private func addButtomPressed(_ sender: UIButton) {

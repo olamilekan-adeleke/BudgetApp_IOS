@@ -3,5 +3,12 @@
     <entity name="BudgetCategory" representedClassName="BudgetCategory" syncable="YES" codeGenerationType="class">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Transactions" inverseName="category" inverseEntity="Transactions"/>
+    </entity>
+    <entity name="Transactions" representedClassName="Transactions" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BudgetCategory" inverseName="transactions" inverseEntity="BudgetCategory"/>
     </entity>
 </model>

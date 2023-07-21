@@ -8,12 +8,29 @@
 import CoreData
 import UIKit
 
-class BudgetCategoryTableViewController: UIViewController {
+class BudgetCategoryTableViewController: UITableViewController {
+    private var fetchedResultController: NSFetchedResultsController<BudgetCategory>!
     private var presistentContainer: NSPersistentContainer
 
     init(presistentContainer: NSPersistentContainer) {
         self.presistentContainer = presistentContainer
         super.init(nibName: nil, bundle: nil)
+
+        let fetchRequest = BudgetCategory.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        self.fetchedResultController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: presistentContainer.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        fetchedResultController.delegate = self
+
+        do {
+            try fetchedResultController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     @available(*, unavailable)
@@ -25,6 +42,9 @@ class BudgetCategoryTableViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setUpUI()
+
+        // register TableView Cell
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BudgetTableViewCell")
     }
 
     @objc private func showAddBudgetCategory(_ sender: UIBarButtonItem) {
@@ -42,5 +62,29 @@ class BudgetCategoryTableViewController: UIViewController {
         navigationItem.rightBarButtonItem = addBudgetCategoryButton
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "My Budget"
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (fetchedResultController.fetchedObjects ?? []).count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetTableViewCell", for: indexPath)
+        let budgetCategory = fetchedResultController.object(at: indexPath)
+
+        var config = cell.defaultContentConfiguration()
+        config.text = budgetCategory.name
+        cell.contentConfiguration = config
+
+        return cell
+    }
+}
+
+extension BudgetCategoryTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        let range = NSMakeRange(0, tableView.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        tableView.reloadSections(sections as IndexSet, with: .automatic)
+//        tableView.reloadData()
     }
 }

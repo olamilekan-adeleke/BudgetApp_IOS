@@ -13,6 +13,7 @@ extension Double {
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
         currencyFormatter.locale = Locale.current
+        currencyFormatter.currencyCode = "NGN"
 
         let formattedString = currencyFormatter.string(from: NSNumber(value: self)) ?? "N/A"
         return formattedString

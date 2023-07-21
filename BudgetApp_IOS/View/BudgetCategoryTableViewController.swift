@@ -83,7 +83,7 @@ class BudgetCategoryTableViewController: UITableViewController {
 
         var config = cell.defaultContentConfiguration()
         config.text = budgetCategory.name
-        config.secondaryText = "NGN \(budgetCategory.amount)"
+        config.secondaryText = budgetCategory.amount.formatToCurrency()
         cell.contentConfiguration = config
 
         return cell

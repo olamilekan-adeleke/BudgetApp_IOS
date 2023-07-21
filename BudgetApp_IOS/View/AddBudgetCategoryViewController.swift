@@ -13,14 +13,6 @@ class AddBudgetCategoryViewController: UIViewController {
     private var persistantContainer: NSPersistentContainer
     private let budgetManager: BudgetManager
     
-    private func iconHelper(_ systemName: String) -> UIView {
-        let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        var image = UIImage(systemName: systemName)?.with(insets)
-        image = image!.withTintColor(UIColor.gray)
-        let imageView = UIImageView(image: image)
-        return imageView
-    }
-    
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Budget Name"

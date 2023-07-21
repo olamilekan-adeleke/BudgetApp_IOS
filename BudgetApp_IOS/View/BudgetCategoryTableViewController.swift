@@ -68,12 +68,22 @@ class BudgetCategoryTableViewController: UITableViewController {
         return (fetchedResultController.fetchedObjects ?? []).count
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let budgetCategory = fetchedResultController.object(at: indexPath)
+        navigationController?.pushViewController(
+            BudgetDetailViewController(presistentContainer: presistentContainer, budgetCategory: budgetCategory),
+            animated: true
+        )
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetTableViewCell", for: indexPath)
         let budgetCategory = fetchedResultController.object(at: indexPath)
+        cell.accessoryType = .disclosureIndicator
 
         var config = cell.defaultContentConfiguration()
         config.text = budgetCategory.name
+        config.secondaryText = "NGN \(budgetCategory.amount)"
         cell.contentConfiguration = config
 
         return cell

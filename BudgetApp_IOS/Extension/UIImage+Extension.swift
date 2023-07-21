@@ -22,3 +22,11 @@ extension UIImage {
         }.withRenderingMode(renderingMode)
     }
 }
+
+func iconHelper(_ systemName: String) -> UIView {
+    let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+    var image = UIImage(systemName: systemName)?.with(insets)
+    image = image!.withTintColor(UIColor.gray)
+    let imageView = UIImageView(image: image)
+    return imageView
+}

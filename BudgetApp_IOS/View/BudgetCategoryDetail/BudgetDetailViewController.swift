@@ -65,6 +65,26 @@ class BudgetDetailViewController: UIViewController {
         return label
     }()
 
+    lazy var transactionTotal: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemTeal
+        label.font = label.font.withSize(12)
+        label.text = ""
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    @discardableResult private func getTransTotal() -> Double {
+        let transations = fetchedResultController.fetchedObjects ?? []
+        return transations.reduce(0) { $0 + $1.amount }
+    }
+
+    private func updateTotalTransaction() {
+        transactionTotal.text = "Transaction Total: " + getTransTotal().formatToCurrency()
+    }
+
     init(presistentContainer: NSPersistentContainer, budgetCategory: BudgetCategory) {
         self.presistentContainer = presistentContainer
         self.budgetCategory = budgetCategory
@@ -94,10 +114,7 @@ class BudgetDetailViewController: UIViewController {
 
     @objc private func addTransTap() {
         let budgetManger = BudgetManager(persistantContainerManager: presistentContainer.viewContext)
-        let addBudgetTransactionCV = AddBudgetTransactionViewController(
-            budgetManager: budgetManger,
-            budgetCategory: budgetCategory
-        )
+        let addBudgetTransactionCV = AddBudgetTransactionViewController(budgetManager: budgetManger, budgetCategory: budgetCategory)
         addBudgetTransactionCV.modalPresentationStyle = .pageSheet
         if let sheet = addBudgetTransactionCV.sheetPresentationController {
             sheet.prefersGrabberVisible = true
@@ -115,6 +132,7 @@ class BudgetDetailViewController: UIViewController {
         title = budgetCategory.name
 
         setUpUI()
+        updateTotalTransaction()
     }
 
     private func setUpUI() {
@@ -125,6 +143,8 @@ class BudgetDetailViewController: UIViewController {
         stackView.addArrangedSubview(container)
         stackView.setCustomSpacing(20, after: container)
 
+        stackView.addArrangedSubview(transactionTotal)
+        stackView.setCustomSpacing(5, after: transactionTotal)
         stackView.addArrangedSubview(tableView)
         view.addSubview(stackView)
 
@@ -141,7 +161,6 @@ class BudgetDetailViewController: UIViewController {
 
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
         ])
     }
 }
@@ -151,6 +170,7 @@ extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
         let range = NSMakeRange(0, tableView.numberOfSections)
         let sections = NSIndexSet(indexesIn: range)
         tableView.reloadSections(sections as IndexSet, with: .automatic)
+        updateTotalTransaction()
     }
 }
 

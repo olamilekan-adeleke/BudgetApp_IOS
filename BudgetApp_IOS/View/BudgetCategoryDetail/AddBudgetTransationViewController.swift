@@ -83,7 +83,6 @@ class AddBudgetTransactionViewController: UIViewController {
         return stack
     }()
     
-    //
     
     private func isFormValid() -> Bool {
         guard let name = nameTextField.text, let amount = amountTextField.text else { return false }
@@ -96,6 +95,7 @@ class AddBudgetTransactionViewController: UIViewController {
             guard let name = nameTextField.text, let amount = Double(amountTextField.text!) else { return }
 
             budgetManager.saveTransaction(name: name, amount: amount, budgetCategory: budgetCategory)
+            dismiss(animated: true)
         } else {
             erroMessage.text = "Invaidb Details, Make sure name and amount is valid"
         }

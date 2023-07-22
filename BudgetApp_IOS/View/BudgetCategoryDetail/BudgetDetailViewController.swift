@@ -71,8 +71,8 @@ class BudgetDetailViewController: UIViewController {
         if let sheet = addBudgetTransactionCV.sheetPresentationController {
             sheet.prefersGrabberVisible = true
             sheet.detents = [
-                .custom { _ in 200 },
-                .custom { context in context.maximumDetentValue * 0.6 },
+                .custom { _ in 300 },
+//                .custom { context in context.maximumDetentValue * 0.6 },
             ]
             present(addBudgetTransactionCV, animated: true)
         }
@@ -95,10 +95,13 @@ class BudgetDetailViewController: UIViewController {
         stackView.addArrangedSubview(container)
         stackView.setCustomSpacing(40, after: container)
 
-//        stackView.addArrangedSubview(tableView)
+//      stackView.addArrangedSubview(tableView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
             container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),

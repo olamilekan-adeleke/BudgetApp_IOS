@@ -36,6 +36,7 @@ class BudgetManager {
             transation.category = budgetCategory
 
             budgetCategory.addToTransactions(transation)
+            try persistantContainerManager.save()
 
         } catch {
             print("Unable To save budget transaction")

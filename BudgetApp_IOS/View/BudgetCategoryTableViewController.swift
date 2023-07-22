@@ -24,7 +24,7 @@ class BudgetCategoryTableViewController: UITableViewController {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        fetchedResultController.delegate = self                                                   
+        fetchedResultController.delegate = self
 
         do {
             try fetchedResultController.performFetch()
@@ -95,6 +95,5 @@ extension BudgetCategoryTableViewController: NSFetchedResultsControllerDelegate 
         let range = NSMakeRange(0, tableView.numberOfSections)
         let sections = NSIndexSet(indexesIn: range)
         tableView.reloadSections(sections as IndexSet, with: .automatic)
-//        tableView.reloadData()
     }
 }

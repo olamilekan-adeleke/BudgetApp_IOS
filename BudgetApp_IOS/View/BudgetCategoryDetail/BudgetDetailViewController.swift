@@ -11,6 +11,7 @@ import UIKit
 
 class BudgetDetailViewController: UIViewController {
     private var presistentContainer: NSPersistentContainer
+    private var fetchedResuktController: NSFetchedResultsController<Transactions>!
     private var budgetCategory: BudgetCategory
 
     private lazy var stackView: UIStackView = {
@@ -19,7 +20,6 @@ class BudgetDetailViewController: UIViewController {
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-//        stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
 
@@ -69,6 +69,22 @@ class BudgetDetailViewController: UIViewController {
         self.presistentContainer = presistentContainer
         self.budgetCategory = budgetCategory
         super.init(nibName: nil, bundle: nil)
+
+        let fetchRequest = Transactions.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "category = %@", budgetCategory)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+
+        self.fetchedResuktController = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: presistentContainer.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        fetchedResuktController.delegate = self
+
+        do {
+            try fetchedResuktController.performFetch()
+        } catch {}
     }
 
     @available(*, unavailable)
@@ -127,6 +143,14 @@ class BudgetDetailViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
 
         ])
+    }
+}
+
+extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        let range = NSMakeRange(0, tableView.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        tableView.reloadSections(sections as IndexSet, with: .automatic)
     }
 }
 

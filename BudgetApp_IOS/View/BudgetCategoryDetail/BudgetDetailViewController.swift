@@ -11,7 +11,7 @@ import UIKit
 
 class BudgetDetailViewController: UIViewController {
     private var presistentContainer: NSPersistentContainer
-    private var fetchedResuktController: NSFetchedResultsController<Transactions>!
+    private var fetchedResultController: NSFetchedResultsController<Transactions>!
     private var budgetCategory: BudgetCategory
 
     private lazy var stackView: UIStackView = {
@@ -74,16 +74,16 @@ class BudgetDetailViewController: UIViewController {
         fetchRequest.predicate = NSPredicate(format: "category = %@", budgetCategory)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
 
-        self.fetchedResuktController = NSFetchedResultsController(
+        self.fetchedResultController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: presistentContainer.viewContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        fetchedResuktController.delegate = self
+        fetchedResultController.delegate = self
 
         do {
-            try fetchedResuktController.performFetch()
+            try fetchedResultController.performFetch()
         } catch {}
     }
 
@@ -158,15 +158,18 @@ extension BudgetDetailViewController: UITableViewDelegate {}
 
 extension BudgetDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return (fetchedResultController.fetchedObjects ?? []).count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath)
+        let transaction = fetchedResultController.object(at: indexPath)
+
         var config = cell.defaultContentConfiguration()
-        config.text = "Testing"
-        config.secondaryText = "This is a test text"
+        config.text = transaction.name
+        config.secondaryText = transaction.amount.formatToCurrency()
         cell.contentConfiguration = config
+
         return cell
     }
 }

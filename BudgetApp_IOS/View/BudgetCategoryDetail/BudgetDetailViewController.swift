@@ -29,6 +29,7 @@ class BudgetDetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.contentInsetAdjustmentBehavior = .never
         return tableView
     }()
 
@@ -48,10 +49,20 @@ class BudgetDetailViewController: UIViewController {
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
         view.translatesAutoresizingMaskIntoConstraints = false
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTransTap))
         view.addGestureRecognizer(tapGesture)
         return view
+    }()
+
+    private lazy var amountLabel: UILabel = {
+        let label = UILabel()
+        label.text = budgetCategory.amount.formatToCurrency()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     init(presistentContainer: NSPersistentContainer, budgetCategory: BudgetCategory) {
@@ -66,7 +77,11 @@ class BudgetDetailViewController: UIViewController {
     }
 
     @objc private func addTransTap() {
-        let addBudgetTransactionCV = AddBudgetTransactionViewController()
+        let budgetManger = BudgetManager(persistantContainerManager: presistentContainer.viewContext)
+        let addBudgetTransactionCV = AddBudgetTransactionViewController(
+            budgetManager: budgetManger,
+            budgetCategory: budgetCategory
+        )
         addBudgetTransactionCV.modalPresentationStyle = .pageSheet
         if let sheet = addBudgetTransactionCV.sheetPresentationController {
             sheet.prefersGrabberVisible = true
@@ -89,17 +104,18 @@ class BudgetDetailViewController: UIViewController {
     private func setUpUI() {
         container.addSubview(containerLabel)
 
+        stackView.addArrangedSubview(amountLabel)
+        stackView.setCustomSpacing(10, after: amountLabel)
         stackView.addArrangedSubview(container)
-//        stackView.setCustomSpacing(40, after: container)
+        stackView.setCustomSpacing(20, after: container)
 
         stackView.addArrangedSubview(tableView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            //            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             container.heightAnchor.constraint(equalToConstant: 50),
@@ -108,7 +124,8 @@ class BudgetDetailViewController: UIViewController {
             containerLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
 
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.heightAnchor.constraint(equalToConstant: 400)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+
         ])
     }
 }
@@ -117,7 +134,7 @@ extension BudgetDetailViewController: UITableViewDelegate {}
 
 extension BudgetDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 15
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

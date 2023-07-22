@@ -26,4 +26,19 @@ class BudgetManager {
             print("Unable To save budget category")
         }
     }
+
+    public func saveTransaction(name: String, amount: Double, budgetCategory: BudgetCategory) {
+        do {
+            let transation = Transactions(context: persistantContainerManager)
+            transation.name = name
+            transation.amount = amount
+            transation.dateCreated = Date()
+            transation.category = budgetCategory
+
+            budgetCategory.addToTransactions(transation)
+
+        } catch {
+            print("Unable To save budget transaction")
+        }
+    }
 }

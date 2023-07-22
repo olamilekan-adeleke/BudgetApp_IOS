@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class AddBudgetTransactionViewController: UIViewController {
+    private var budgetManager: BudgetManager
+    private var budgetCategory: BudgetCategory
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -29,7 +31,6 @@ class AddBudgetTransactionViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
@@ -60,6 +61,7 @@ class AddBudgetTransactionViewController: UIViewController {
         button.backgroundColor = .systemTeal
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(saveTrans), for: .touchUpInside)
         return button
     }()
     
@@ -81,7 +83,27 @@ class AddBudgetTransactionViewController: UIViewController {
         return stack
     }()
     
-    init() {
+    //
+    
+    private func isFormValid() -> Bool {
+        guard let name = nameTextField.text, let amount = amountTextField.text else { return false }
+
+        return !name.isEmpty == true && !amount.isEmpty && Double(amount) != nil
+    }
+
+    @objc private func saveTrans(_ sender: UIButton) {
+        if isFormValid() {
+            guard let name = nameTextField.text, let amount = Double(amountTextField.text!) else { return }
+
+            budgetManager.saveTransaction(name: name, amount: amount, budgetCategory: budgetCategory)
+        } else {
+            erroMessage.text = "Invaidb Details, Make sure name and amount is valid"
+        }
+    }
+    
+    init(budgetManager: BudgetManager, budgetCategory: BudgetCategory) {
+        self.budgetManager = budgetManager
+        self.budgetCategory = budgetCategory
         super.init(nibName: nil, bundle: nil)
     }
     

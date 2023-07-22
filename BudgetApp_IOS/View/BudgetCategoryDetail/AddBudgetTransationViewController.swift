@@ -9,12 +9,35 @@ import Foundation
 import UIKit
 
 class AddBudgetTransactionViewController: UIViewController {
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Add Transations"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = UIColor.black
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Enter the details of your transation below."
+        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textColor = UIColor.gray
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
     lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Transaction Name"
         textField.leftView = iconHelper("text.book.closed")
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -24,6 +47,7 @@ class AddBudgetTransactionViewController: UIViewController {
         textField.leftView = iconHelper("nairasign")
         textField.leftViewMode = .always
         textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -34,6 +58,8 @@ class AddBudgetTransactionViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
         button.backgroundColor = .systemTeal
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 5
         return button
     }()
     
@@ -43,6 +69,7 @@ class AddBudgetTransactionViewController: UIViewController {
         label.font = label.font.withSize(12)
         label.text = ""
         label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -51,7 +78,6 @@ class AddBudgetTransactionViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
     
@@ -65,17 +91,40 @@ class AddBudgetTransactionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        view.backgroundColor = .white
+        title = "Add Transactions"
+        
         setUpUI()
     }
     
     private func setUpUI() {
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(subtitleLabel)
+        stackView.setCustomSpacing(20, after: subtitleLabel)
+        
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(amountTextField)
+        stackView.setCustomSpacing(15, after: nameTextField)
         stackView.setCustomSpacing(40, after: amountTextField)
         
         stackView.addArrangedSubview(addSaveButton)
         stackView.setCustomSpacing(10, after: addSaveButton)
         
         stackView.addArrangedSubview(erroMessage)
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor),
+            subtitleLabel.leadingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.leadingAnchor),
+        
+            nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            
+            amountTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            addSaveButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+        ])
     }
 }

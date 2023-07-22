@@ -18,6 +18,7 @@ class BudgetDetailViewController: UIViewController {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
@@ -27,12 +28,13 @@ class BudgetDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TransactionTableViewCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
     private lazy var containerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Tap To Add Transation For Ther Budget"
+        label.text = "Tap To Add Transations"
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
         label.textColor = UIColor.gray
         label.numberOfLines = 0
@@ -46,6 +48,9 @@ class BudgetDetailViewController: UIViewController {
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 5
         view.translatesAutoresizingMaskIntoConstraints = false
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addTransTap))
+        view.addGestureRecognizer(tapGesture)
         return view
     }()
 
@@ -60,10 +65,17 @@ class BudgetDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        let dashedBorderLayer = container.addLineDashedStroke(pattern: [2, 2], radius: 16, color: UIColor.gray.cgColor)
-//        container.layer.addSublayer(dashedBorderLayer)
-//    }
+    @objc private func addTransTap() {
+        let addBudgetTransactionCV = AddBudgetTransactionViewController()
+        addBudgetTransactionCV.modalPresentationStyle = .pageSheet
+        if let sheet = addBudgetTransactionCV.sheetPresentationController {
+            sheet.prefersGrabberVisible = true
+            sheet.detents = [
+                .custom { _ in 400 },
+            ]
+            present(addBudgetTransactionCV, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +94,7 @@ class BudgetDetailViewController: UIViewController {
         stackView.addArrangedSubview(container)
         stackView.setCustomSpacing(40, after: container)
 
-        stackView.addArrangedSubview(tableView)
+//        stackView.addArrangedSubview(tableView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([

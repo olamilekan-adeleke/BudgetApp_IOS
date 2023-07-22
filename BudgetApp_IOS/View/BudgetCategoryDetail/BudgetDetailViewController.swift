@@ -19,7 +19,7 @@ class BudgetDetailViewController: UIViewController {
         stack.axis = .vertical
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-        stack.spacing = UIStackView.spacingUseSystem
+//        stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
 
@@ -70,10 +70,7 @@ class BudgetDetailViewController: UIViewController {
         addBudgetTransactionCV.modalPresentationStyle = .pageSheet
         if let sheet = addBudgetTransactionCV.sheetPresentationController {
             sheet.prefersGrabberVisible = true
-            sheet.detents = [
-                .custom { _ in 300 },
-//                .custom { context in context.maximumDetentValue * 0.6 },
-            ]
+            sheet.detents = [.custom { _ in 300 }]
             present(addBudgetTransactionCV, animated: true)
         }
     }
@@ -93,13 +90,13 @@ class BudgetDetailViewController: UIViewController {
         container.addSubview(containerLabel)
 
         stackView.addArrangedSubview(container)
-        stackView.setCustomSpacing(40, after: container)
+//        stackView.setCustomSpacing(40, after: container)
 
-//      stackView.addArrangedSubview(tableView)
+        stackView.addArrangedSubview(tableView)
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            //            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -109,6 +106,9 @@ class BudgetDetailViewController: UIViewController {
 
             containerLabel.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             containerLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+
+            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
 }
@@ -122,6 +122,10 @@ extension BudgetDetailViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTableViewCell", for: indexPath)
+        var config = cell.defaultContentConfiguration()
+        config.text = "Testing"
+        config.secondaryText = "This is a test text"
+        cell.contentConfiguration = config
         return cell
     }
 }

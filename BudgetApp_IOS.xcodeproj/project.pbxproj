@@ -20,6 +20,8 @@
 		39E092492A6925430020682A /* BudgetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E092482A6925430020682A /* BudgetManager.swift */; };
 		39E0924B2A6A40460020682A /* BudgetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */; };
 		39E0924D2A6A49E80020682A /* Double+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0924C2A6A49E80020682A /* Double+Extenstion.swift */; };
+		39EBC76F2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */; };
+		39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		39E092482A6925430020682A /* BudgetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetManager.swift; sourceTree = "<group>"; };
 		39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetDetailViewController.swift; sourceTree = "<group>"; };
 		39E0924C2A6A49E80020682A /* Double+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extenstion.swift"; sourceTree = "<group>"; };
+		39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetTransationViewController.swift; sourceTree = "<group>"; };
+		39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +90,9 @@
 		3936C3532A6545D800804DF1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39EBC76D2A6BE2BE006B3139 /* BudgetCategoryDetail */,
 				3936C3402A65368C00804DF1 /* BudgetCategoryTableViewController.swift */,
 				3936C3542A65460600804DF1 /* AddBudgetCategoryViewController.swift */,
-				39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,6 +104,7 @@
 				39E092432A67C7CC0020682A /* UIImage+Extension.swift */,
 				39E092452A67EE300020682A /* UITextField+Extension.swift */,
 				39E0924C2A6A49E80020682A /* Double+Extenstion.swift */,
+				39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -110,6 +115,15 @@
 				39E092482A6925430020682A /* BudgetManager.swift */,
 			);
 			path = BudgetManager;
+			sourceTree = "<group>";
+		};
+		39EBC76D2A6BE2BE006B3139 /* BudgetCategoryDetail */ = {
+			isa = PBXGroup;
+			children = (
+				39E0924A2A6A40460020682A /* BudgetDetailViewController.swift */,
+				39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */,
+			);
+			path = BudgetCategoryDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39EBC76F2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift in Sources */,
+				39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */,
 				3936C3582A65545300804DF1 /* UIViewController+Extension.swift in Sources */,
 				39E092442A67C7CC0020682A /* UIImage+Extension.swift in Sources */,
 				39E092492A6925430020682A /* BudgetManager.swift in Sources */,

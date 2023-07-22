@@ -24,7 +24,7 @@ class BudgetCategoryTableViewController: UITableViewController {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
-        fetchedResultController.delegate = self
+        fetchedResultController.delegate = self                                                   
 
         do {
             try fetchedResultController.performFetch()

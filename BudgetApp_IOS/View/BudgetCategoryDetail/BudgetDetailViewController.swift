@@ -71,7 +71,8 @@ class BudgetDetailViewController: UIViewController {
         if let sheet = addBudgetTransactionCV.sheetPresentationController {
             sheet.prefersGrabberVisible = true
             sheet.detents = [
-                .custom { _ in 400 },
+                .custom { _ in 200 },
+                .custom { context in context.maximumDetentValue * 0.6 },
             ]
             present(addBudgetTransactionCV, animated: true)
         }

@@ -22,6 +22,7 @@
 		39E0924D2A6A49E80020682A /* Double+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E0924C2A6A49E80020682A /* Double+Extenstion.swift */; };
 		39EBC76F2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */; };
 		39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */; };
+		39EBC7742A6C6657006B3139 /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		39E0924C2A6A49E80020682A /* Double+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extenstion.swift"; sourceTree = "<group>"; };
 		39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetTransationViewController.swift; sourceTree = "<group>"; };
 		39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		3936C3532A6545D800804DF1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				39EBC7722A6C663B006B3139 /* Cell */,
 				39EBC76D2A6BE2BE006B3139 /* BudgetCategoryDetail */,
 				3936C3402A65368C00804DF1 /* BudgetCategoryTableViewController.swift */,
 				3936C3542A65460600804DF1 /* AddBudgetCategoryViewController.swift */,
@@ -124,6 +127,14 @@
 				39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */,
 			);
 			path = BudgetCategoryDetail;
+			sourceTree = "<group>";
+		};
+		39EBC7722A6C663B006B3139 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 				39E0924D2A6A49E80020682A /* Double+Extenstion.swift in Sources */,
 				39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */,
 				3936C3552A65460600804DF1 /* AddBudgetCategoryViewController.swift in Sources */,
+				39EBC7742A6C6657006B3139 /* BudgetTableViewCell.swift in Sources */,
 				3936C33F2A65368C00804DF1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

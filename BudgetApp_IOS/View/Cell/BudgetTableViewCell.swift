@@ -38,7 +38,7 @@ class BudgetTableViewCell: UITableViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 44)
+        stack.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 30)
         return stack
     }()
 
@@ -65,11 +65,12 @@ class BudgetTableViewCell: UITableViewCell {
     public func config(_ budgetCategory: BudgetCategory) {
         titleLabel.text = budgetCategory.name
         subtitleLabel.text = budgetCategory.amount.formatToCurrency()
-        trailingLabel.text = "Remaining: " + "NGN 50.00"
+        trailingLabel.text = budgetCategory.remainingAmount.formatToCurrency() + " Left"
     }
 
     private func setUpUI() {
         hStackView.addArrangedSubview(titleLabel)
+        hStackView.setCustomSpacing(5, after: titleLabel)
         hStackView.addArrangedSubview(subtitleLabel)
 
         stackView.addArrangedSubview(hStackView)

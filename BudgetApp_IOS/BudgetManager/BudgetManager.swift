@@ -42,4 +42,24 @@ class BudgetManager {
             print("Unable To save budget transaction")
         }
     }
+
+    public func deleteTransaction(transaction: Transactions) {
+        do {
+            persistantContainerManager.delete(transaction)
+            try persistantContainerManager.save()
+
+        } catch {
+            print("Unable To delete budget transaction")
+        }
+    }
+    
+    public func deleteBudgetCategory(budegtCategory: BudgetCategory) {
+        do {
+            persistantContainerManager.delete(budegtCategory)
+            try persistantContainerManager.save()
+            
+        } catch {
+            print("Unable To delete budget transaction")
+        }
+    }
 }

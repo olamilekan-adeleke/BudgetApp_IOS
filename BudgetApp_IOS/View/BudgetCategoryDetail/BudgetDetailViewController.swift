@@ -13,6 +13,7 @@ class BudgetDetailViewController: UIViewController {
     private var presistentContainer: NSPersistentContainer
     private var fetchedResultController: NSFetchedResultsController<Transactions>!
     private var budgetCategory: BudgetCategory
+    private var budgetManager: BudgetManager
 
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
@@ -76,18 +77,15 @@ class BudgetDetailViewController: UIViewController {
         return label
     }()
 
-    @discardableResult private func getTransTotal() -> Double {
-        let transations = fetchedResultController.fetchedObjects ?? []
-        return transations.reduce(0) { $0 + $1.amount }
-    }
-
     private func updateTotalTransaction() {
-        transactionTotal.text = "Transaction Total: " + getTransTotal().formatToCurrency()
+        transactionTotal.text = "Transaction Total: " + budgetCategory.transactionTotal.formatToCurrency()
     }
 
     init(presistentContainer: NSPersistentContainer, budgetCategory: BudgetCategory) {
         self.presistentContainer = presistentContainer
         self.budgetCategory = budgetCategory
+        self.budgetManager = BudgetManager(persistantContainerManager: presistentContainer.viewContext)
+        
         super.init(nibName: nil, bundle: nil)
 
         let fetchRequest = Transactions.fetchRequest()
@@ -174,7 +172,14 @@ extension BudgetDetailViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-extension BudgetDetailViewController: UITableViewDelegate {}
+extension BudgetDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let transaction = fetchedResultController.object(at: indexPath)
+            budgetManager.deleteTransaction(transaction: transaction)
+        }
+    }
+}
 
 extension BudgetDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

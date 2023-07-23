@@ -23,6 +23,7 @@
 		39EBC76F2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */; };
 		39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */; };
 		39EBC7742A6C6657006B3139 /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */; };
+		39EBC7772A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7762A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		39EBC76E2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBudgetTransationViewController.swift; sourceTree = "<group>"; };
 		39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
+		39EBC7762A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudegtCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		3936C33B2A65368C00804DF1 /* BudgetApp_IOS */ = {
 			isa = PBXGroup;
 			children = (
+				39EBC7752A6D2B68006B3139 /* Model */,
 				39E092472A6925290020682A /* BudgetManager */,
 				3936C3562A65543500804DF1 /* Extension */,
 				3936C3532A6545D800804DF1 /* View */,
@@ -135,6 +138,14 @@
 				39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		39EBC7752A6D2B68006B3139 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39EBC7762A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39EBC7772A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift in Sources */,
 				39EBC76F2A6BE2F2006B3139 /* AddBudgetTransationViewController.swift in Sources */,
 				39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */,
 				3936C3582A65545300804DF1 /* UIViewController+Extension.swift in Sources */,

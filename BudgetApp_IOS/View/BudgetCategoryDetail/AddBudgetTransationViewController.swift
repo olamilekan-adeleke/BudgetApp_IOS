@@ -97,7 +97,7 @@ class AddBudgetTransactionViewController: UIViewController {
             budgetManager.saveTransaction(name: name, amount: amount, budgetCategory: budgetCategory)
             dismiss(animated: true)
         } else {
-            erroMessage.text = "Invaidb Details, Make sure name and amount is valid"
+            erroMessage.text = "Invalid Details, Make sure name and amount is valid"
         }
     }
     

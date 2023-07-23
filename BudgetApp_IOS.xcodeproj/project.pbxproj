@@ -24,6 +24,7 @@
 		39EBC7712A6BFD34006B3139 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */; };
 		39EBC7742A6C6657006B3139 /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */; };
 		39EBC7772A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7762A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift */; };
+		39EBC7792A6D3ABB006B3139 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBC7782A6D3ABB006B3139 /* UIViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		39EBC7732A6C6657006B3139 /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
 		39EBC7762A6D2B84006B3139 /* BudegtCategory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BudegtCategory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		39EBC7782A6D3ABB006B3139 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				39E092452A67EE300020682A /* UITextField+Extension.swift */,
 				39E0924C2A6A49E80020682A /* Double+Extenstion.swift */,
 				39EBC7702A6BFD34006B3139 /* UIView+Extension.swift */,
+				39EBC7782A6D3ABB006B3139 /* UIViewController+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				39E0924B2A6A40460020682A /* BudgetDetailViewController.swift in Sources */,
 				39E0924D2A6A49E80020682A /* Double+Extenstion.swift in Sources */,
 				39E092462A67EE300020682A /* UITextField+Extension.swift in Sources */,
+				39EBC7792A6D3ABB006B3139 /* UIViewController+Extensions.swift in Sources */,
 				3936C3552A65460600804DF1 /* AddBudgetCategoryViewController.swift in Sources */,
 				39EBC7742A6C6657006B3139 /* BudgetTableViewCell.swift in Sources */,
 				3936C33F2A65368C00804DF1 /* SceneDelegate.swift in Sources */,

@@ -11,11 +11,11 @@ import UIKit
 class BudgetCategoryTableViewController: UITableViewController {
     private var fetchedResultController: NSFetchedResultsController<BudgetCategory>!
     private var presistentContainer: NSPersistentContainer
-    private var budegtManager: BudgetManager
+    private var budgetManager: BudgetManager
 
     init(presistentContainer: NSPersistentContainer) {
         self.presistentContainer = presistentContainer
-        self.budegtManager = BudgetManager(persistantContainerManager: presistentContainer.viewContext)
+        self.budgetManager = BudgetManager(persistantContainerManager: presistentContainer.viewContext)
         super.init(nibName: nil, bundle: nil)
 
         let fetchRequest = BudgetCategory.fetchRequest()
@@ -92,7 +92,7 @@ class BudgetCategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let budgetCategory = fetchedResultController.object(at: indexPath)
-            budgetManager.deleteBudgetCategory(budgetCategory)
+            budgetManager.deleteBudgetCategory(budgetCategory: budgetCategory)
         }
     }
 }
